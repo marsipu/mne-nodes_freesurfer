@@ -1,0 +1,60 @@
+{
+    "recon-all": {
+        "command": ["recon-all"],
+        "command_args": {
+            "subject": "-s",
+            "anat": "-i",
+            "all": "-all",
+            "extra_args": null
+        },
+        "uses_freesurfer": true,
+        "bids_subject_from": "anat",
+        "inputs": {
+            "anat": {"accepted_ports": ["anat"], "optional": false}
+        },
+        "parameters": {
+            "all": {"gui": "BoolGui", "default": true},
+            "extra_args": {
+                "gui": "ListGui",
+                "default": [],
+                "description": "Additional argv tokens, not a shell command string."
+            }
+        },
+        "outputs": {
+            "subject": {"accepted_ports": ["subject"], "optional": false}
+        },
+        "target": "file",
+        "category": "FreeSurfer",
+        "sub_category": null,
+        "description": "Reconstruct a BIDS T1 image connected through anat, deriving the subject from its BIDS label. Outputs the FreeSurfer subject. Full reconstruction takes hours and modifies that subject.",
+        "module_name": null,
+        "class_name": null
+    },
+    "make_watershed_bem": {
+        "uses_freesurfer": true,
+        "inputs": {
+            "subject": {"accepted_ports": ["subject"], "optional": false}
+        },
+        "parameters": {
+            "subjects_dir": {"gui": "PathGui", "default": null},
+            "overwrite": {"gui": "BoolGui", "default": false},
+            "volume": {"gui": "StringGui", "default": "T1"},
+            "atlas": {"gui": "BoolGui", "default": false},
+            "gcaatlas": {"gui": "BoolGui", "default": false},
+            "preflood": {
+                "gui": "IntGui", "default": null, "none_select": true
+            },
+            "show": {"gui": "BoolGui", "default": false},
+            "copy": {"gui": "BoolGui", "default": true}
+        },
+        "outputs": {
+            "subject": {"accepted_ports": ["subject"], "optional": false}
+        },
+        "target": "file",
+        "category": "FreeSurfer",
+        "sub_category": null,
+        "description": "Create watershed BEM surfaces using mne.bem.make_watershed_bem in the FreeSurfer environment.",
+        "module_name": "mne.bem",
+        "class_name": null
+    }
+}

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mne-nodes_freesurfer"
+version = "0.1.0"
+description = "FreeSurfer command and MNE function nodes for MNE-Nodes."
+requires-python = ">=3.11"
+dependencies = ["mne", "mne-nodes"]
+readme = "README.md"
+license = "BSD-3-Clause"
+
+[project.entry-points."mne_nodes.plugins"]
+freesurfer = "mne_nodes_freesurfer"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mne_nodes_freesurfer"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/pyproject.toml", "/README.md"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "double"
+skip-magic-trailing-comma = true
